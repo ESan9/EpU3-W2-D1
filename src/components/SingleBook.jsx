@@ -2,25 +2,26 @@ import { Component } from "react";
 import { Card } from "react-bootstrap";
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
-
   render() {
+    const { book, isSelected, onSelect } = this.props;
+    // Prendi le proprietà book, isSelected e onSelect dall’oggetto this.props e crea 3 variabili locali con lo stesso nome.
+
     return (
-      <>
-        <Card
-          onClick={() => this.setState({ selected: !this.state.selected })}
-          style={{ border: this.state.selected ? "3px solid red" : "none" }}
-        >
-          <Card.Img variant="top" src={this.props.book.img} />
-          <Card.Body>
-            <Card.Title style={{ color: "black" }}>
-              {this.props.book.title}
-            </Card.Title>
-          </Card.Body>
-        </Card>
-      </>
+      <Card
+        onClick={() => onSelect(book.asin)}
+        // Quando un SingleBook viene cliccato, chiama onSelect(book.asin).
+
+        // Le passo come argomento book.asin (cioè il valore della proprietà asin del libro corrente).
+        style={{
+          border: isSelected ? "3px solid red" : "1px solid #ddd",
+          cursor: "pointer",
+        }}
+      >
+        <Card.Img variant="top" src={book.img} />
+        <Card.Body>
+          <Card.Title style={{ color: "black" }}>{book.title}</Card.Title>
+        </Card.Body>
+      </Card>
     );
   }
 }
